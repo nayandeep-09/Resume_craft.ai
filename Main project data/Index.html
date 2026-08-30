@@ -1,182 +1,704 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
+
+    <!-- =========================================================
+         BASIC DOCUMENT INFORMATION
+         ========================================================= -->
+
+    <!-- Character encoding -->
     <meta charset="UTF-8">
+
+    <!-- Makes the website responsive on mobile/tablet/desktop -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ResumePro - Build, Optimize, Get Hired</title>
+
+    <!-- Description shown by search engines/browser previews -->
+    <meta name="description" content="Resume.ai account access">
+
+    <!-- Browser tab title -->
+    <title>Resume.ai — Your career, clearly presented</title>
+
+
+    <!-- =========================================================
+         GOOGLE FONTS
+         ========================================================= -->
+
+    <!-- Establish connection to Google Fonts before loading fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!--
+        Fonts used by Resume.ai:
+
+        DM Sans
+        - Main/body font
+        - Used for normal text, buttons, forms, etc.
+
+        Playfair Display
+        - Decorative/display font
+        - Used for larger headings
+    -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =========================================================
+         WEBSITE CSS
+         ========================================================= -->
+
+    <!-- Main stylesheet containing the design and layout -->
     <link rel="stylesheet" href="styles.css">
+
 </head>
+
+
 <body>
-    <div class="container">
-        <!-- Login Page -->
-        <div class="page login-page active">
-            <div class="login-left">
-                <h1>Create a Resume<br>That <span class="highlight">Opens Doors</span></h1>
-                <p>Create, update and optimize your resume with powerful AI tools and real-time ATS analysis.</p>
+
+    <!-- =========================================================
+         BACKGROUND / AMBIENT DECORATIONS
+         ========================================================= -->
+
+    <!-- Decorative background element -->
+    <div class="ambient ambient-one"></div>
+
+    <!-- Second decorative background element -->
+    <div class="ambient ambient-two"></div>
+
+
+    <!-- =========================================================
+         MAIN AUTHENTICATION CONTAINER
+         ========================================================= -->
+
+    <!--
+        Main wrapper containing:
+
+        1. Resume.ai logo
+        2. Introduction/marketing section
+        3. Login / Signup / Forgot Password cards
+        4. Privacy message
+    -->
+    <main class="auth-shell">
+
+
+        <!-- =====================================================
+             RESUME.AI BRAND / LOGO
+             ===================================================== -->
+
+        <!--
+            Clicking the brand currently points to "#".
+            aria-label helps screen readers understand the link.
+        -->
+        <a
+            class="brand"
+            href="#"
+            aria-label="Resume.ai home"
+        >
+
+            <!-- Logo icon made using three <i> elements -->
+            <span class="brand-mark">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+
+            <!-- Website name -->
+            <span>
+                resume<span>.ai</span>
+            </span>
+
+        </a>
+
+
+        <!-- =====================================================
+             INTRODUCTION / HERO SECTION
+             ===================================================== -->
+
+        <section
+            class="intro"
+            aria-labelledby="page-title"
+        >
+
+            <!-- Small heading above the main title -->
+            <p class="eyebrow">
+                AI-Powered career studio
+            </p>
+
+
+            <!-- Main page heading -->
+            <h1 id="page-title">
+                Make every<br>
+                <em>application</em> count.
+            </h1>
+
+
+            <!-- Introduction text -->
+            <p>
+                Build a resume that tells your story, finds the right
+                words, and gets noticed by the people who matter.
+            </p>
+
+
+            <!-- =================================================
+                 SOCIAL PROOF / TRUST SECTION
+                 ================================================= -->
+
+            <div class="proof">
+
+                <!-- Small user/avatar circles -->
+                <span class="avatars">
+                    <i>J</i>
+                    <i>M</i>
+                    <i>A</i>
+                </span>
+
+                <!-- Trust message -->
+                <span>
+                    Trusted by 20,000+ ambitious professionals
+                </span>
+
             </div>
 
-            <div class="login-right">
-                <h2>Welcome Back! 👋</h2>
-                <p style="text-align: center; color: #999; margin-bottom: 30px; font-size: 0.95rem;">Login to continue building your future</p>
+        </section>
 
-                <div id="loginMessage" class="message"></div>
 
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label for="login-email">Email Address</label>
-                        <input type="email" id="login-email" placeholder="Enter your email" required>
-                    </div>
+        <!-- =====================================================
+             AUTHENTICATION CARD AREA
+             ===================================================== -->
 
-                    <div class="form-group">
-                        <label for="login-password">Password</label>
-                        <input type="password" id="login-password" placeholder="Enter your password" required>
-                    </div>
+        <!--
+            This section contains three authentication cards:
 
-                    <div class="remember-forgot">
+            1. Login
+            2. Signup
+            3. Forgot Password
+
+            data-active tells JavaScript which card is currently active.
+        -->
+        <section
+            class="card-stage"
+            data-active="login"
+            aria-label="Account access"
+        >
+
+
+            <!-- =================================================
+                 LOGIN CARD
+                 ================================================= -->
+
+            <article
+                class="auth-card login-card active"
+                data-card="login"
+                tabindex="0"
+                aria-label="Log in to Resume.ai"
+            >
+
+                <!-- Card header -->
+                <div class="card-top">
+
+                    <!-- Login card icon -->
+                    <span class="card-icon">↗</span>
+
+                    <!-- Small card heading -->
+                    <span class="card-kicker">
+                        Welcome back
+                    </span>
+
+                    <!-- Status badge -->
+                    <span class="active-chip">
+                        Active
+                    </span>
+
+                </div>
+
+
+                <!-- Login card main content -->
+                <div class="card-body">
+
+                    <!-- Login heading -->
+                    <h2>
+                        Continue your<br>
+                        career story.
+                    </h2>
+
+
+                    <!-- Login description -->
+                    <p class="card-description">
+                        Pick up where you left off and turn your next
+                        opportunity into progress.
+                    </p>
+
+
+                    <!-- Login success/error messages appear here -->
+                    <div
+                        class="message"
+                        id="loginMessage"
+                        role="status"
+                    ></div>
+
+
+                    <!-- =================================================
+                         LOGIN FORM
+                         ================================================= -->
+
+                    <form id="loginForm">
+
+                        <!-- Email field -->
                         <label>
-                            <input type="checkbox" id="rememberMe">
-                            Remember me
+                            Email address
+
+                            <input
+                                id="login-email"
+                                type="email"
+                                placeholder="you@example.com"
+                                autocomplete="email"
+                                required
+                            >
                         </label>
-                        <a href="#" class="forgot-password" onclick="handleForgotPassword(event)">Forgot Password?</a>
-                    </div>
 
-                    <button type="submit" class="login-btn">Login</button>
-                </form>
 
-                <div class="divider">or continue with</div>
+                        <!-- Password field -->
+                        <label>
+                            Password
 
-                <div class="social-login">
-                    <button type="button" class="social-btn">
-                        <span>🔍 Google</span>
-                    </button>
-                    <button type="button" class="social-btn">
-                        <span>⊞ Microsoft</span>
-                    </button>
-                    <button type="button" class="social-btn">
-                        <span>in LinkedIn</span>
-                    </button>
-                </div>
+                            <input
+                                id="login-password"
+                                type="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+                        </label>
 
-                <div class="signup-link">
-                    Don't have an account? <a onclick="switchPage('signup')">Sign up</a>
-                </div>
 
-                <div class="security-note">
-                    🔒 Your data is secure with us
-                </div>
-            </div>
-        </div>
+                        <!-- Remember me + Forgot password -->
+                        <div class="form-options">
 
-        <!-- Signup Page -->
-        <div class="page signup-page">
-            <div class="signup-left">
-                <img src="../Research/Images/Login 1st page.png" alt="Resume Building" onerror="this.style.display='none'">
-            </div>
+                            <!-- Remember me checkbox -->
+                            <label class="check-label">
 
-            <div class="signup-right">
-                <div class="logo">
-                    <div class="logo-icon">📄</div>
-                    ResumePro
-                </div>
+                                <input
+                                    id="rememberMe"
+                                    type="checkbox"
+                                >
 
-                <h2>Create a Resume<br>That <span class="highlight">Gets You Hired</span></h2>
-                <p class="subtitle">Create, update and optimize your resume with powerful AI tools and real-time ATS analysis.</p>
+                                <span>
+                                    Remember me
+                                </span>
 
-                <div id="signupMessage" class="message"></div>
+                            </label>
 
-                <form id="signupForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="first-name">First Name</label>
-                            <input type="text" id="first-name" placeholder="Enter your first name" required>
+
+                            <!-- Forgot password button -->
+                            <button
+                                class="text-button"
+                                type="button"
+                                data-switch="forgot"
+                            >
+                                Forgot password?
+                            </button>
+
                         </div>
-                        <div class="form-group">
-                            <label for="last-name">Last Name</label>
-                            <input type="text" id="last-name" placeholder="Enter your last name" required>
+
+
+                        <!-- Login submit button -->
+                        <button
+                            class="primary-button"
+                            type="submit"
+                        >
+                            Log in <span>→</span>
+                        </button>
+
+                    </form>
+
+
+                    <!-- Link to signup card -->
+                    <p class="form-foot">
+
+                        New to Resume.ai?
+
+                        <button
+                            class="text-button"
+                            type="button"
+                            data-switch="signup"
+                        >
+                            Create an account
+                        </button>
+
+                    </p>
+
+                </div>
+
+
+                <!--
+                    Compact version of the card.
+                    Usually used by the CSS when the card is not active.
+                -->
+                <div class="compact-content">
+
+                    <strong>
+                        Log in
+                    </strong>
+
+                    <span>
+                        Return to your workspace
+                    </span>
+
+                    <b>
+                        →
+                    </b>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 SIGNUP CARD
+                 ================================================= -->
+
+            <article
+                class="auth-card signup-card"
+                data-card="signup"
+                tabindex="0"
+                aria-label="Create a Resume.ai account"
+            >
+
+                <!-- Signup card header -->
+                <div class="card-top">
+
+                    <!-- Signup icon -->
+                    <span class="card-icon">
+                        ✦
+                    </span>
+
+                    <!-- Card heading -->
+                    <span class="card-kicker">
+                        Start for free
+                    </span>
+
+                    <!-- Status badge -->
+                    <span class="active-chip">
+                        Active
+                    </span>
+
+                </div>
+
+
+                <!-- Signup card main content -->
+                <div class="card-body">
+
+                    <!-- Signup heading -->
+                    <h2>
+                        Your next chapter<br>
+                        starts here.
+                    </h2>
+
+
+                    <!-- Signup description -->
+                    <p class="card-description">
+                        Create your account and let your experience shine
+                        with a little AI guidance.
+                    </p>
+
+
+                    <!-- Signup success/error messages -->
+                    <div
+                        class="message"
+                        id="signupMessage"
+                        role="status"
+                    ></div>
+
+
+                    <!-- =================================================
+                         SIGNUP FORM
+                         ================================================= -->
+
+                    <form id="signupForm">
+
+                        <!-- First name + Last name -->
+                        <div class="name-row">
+
+                            <!-- First name -->
+                            <label>
+                                First name
+
+                                <input
+                                    id="first-name"
+                                    type="text"
+                                    placeholder="Alex"
+                                    autocomplete="given-name"
+                                    required
+                                >
+                            </label>
+
+
+                            <!-- Last name -->
+                            <label>
+                                Last name
+
+                                <input
+                                    id="last-name"
+                                    type="text"
+                                    placeholder="Morgan"
+                                    autocomplete="family-name"
+                                    required
+                                >
+                            </label>
+
                         </div>
-                    </div>
 
-                    <div class="form-row full">
-                        <div class="form-group">
-                            <label for="signup-email">Email Address</label>
-                            <input type="email" id="signup-email" placeholder="Enter your email" required>
-                        </div>
-                    </div>
 
-                    <div class="form-row full">
-                        <div class="form-group">
-                            <label for="signup-password">Password</label>
-                            <input type="password" id="signup-password" placeholder="Create a strong password" required>
-                            <div class="password-strength">
-                                <div class="strength-meter" id="strengthMeter"></div>
-                                <span id="strengthText"></span>
-                            </div>
-                        </div>
-                    </div>
+                        <!-- Email -->
+                        <label>
+                            Email address
 
-                    <div class="form-row full">
-                        <div class="form-group">
-                            <label for="confirm-password">Confirm Password</label>
-                            <input type="password" id="confirm-password" placeholder="Confirm your password" required>
-                        </div>
-                    </div>
+                            <input
+                                id="signup-email"
+                                type="email"
+                                placeholder="you@example.com"
+                                autocomplete="email"
+                                required
+                            >
+                        </label>
 
-                    <button type="submit" class="signup-btn">Create Account</button>
-                </form>
 
-                <div class="login-link">
-                    Already have an account? <a onclick="switchPage('login')">Log in</a>
+                        <!-- Password -->
+                        <label>
+                            Password
+
+                            <input
+                                id="signup-password"
+                                type="password"
+                                placeholder="Create a password"
+                                autocomplete="new-password"
+                                required
+                            >
+                        </label>
+
+
+                        <!-- Confirm password -->
+                        <label>
+                            Confirm password
+
+                            <input
+                                id="confirm-password"
+                                type="password"
+                                placeholder="Repeat your password"
+                                autocomplete="new-password"
+                                required
+                            >
+                        </label>
+
+
+                        <!-- Create account button -->
+                        <button
+                            class="primary-button"
+                            type="submit"
+                        >
+                            Create account <span>→</span>
+                        </button>
+
+                    </form>
+
+
+                    <!-- Link back to login -->
+                    <p class="form-foot">
+
+                        Already have an account?
+
+                        <button
+                            class="text-button"
+                            type="button"
+                            data-switch="login"
+                        >
+                            Log in
+                        </button>
+
+                    </p>
+
                 </div>
 
-                <div class="terms">
-                    By signing up, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
-                </div>
-            </div>
-        </div>
 
-        <!-- Dashboard (shown after successful login) -->
-        <div class="page dashboard-page">
-            <div class="dashboard-header">
-                <div class="logo">
-                    <div class="logo-icon">📄</div>
-                    ResumePro
-                </div>
-                <div class="user-info">
-                    <span id="userNameDisplay">User</span>
-                    <button class="logout-btn" onclick="handleLogout()">Logout</button>
-                </div>
-            </div>
+                <!-- Compact signup card -->
+                <div class="compact-content">
 
-            <div class="dashboard-content">
-                <h1>Welcome to ResumePro, <span id="userFirstName">User</span>! 🎉</h1>
-                <p>You are now logged in and can start building your amazing resume.</p>
-                
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">✍️</div>
-                        <h3>Create Resume</h3>
-                        <p>Build a professional resume from scratch</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">✨</div>
-                        <h3>AI Optimize</h3>
-                        <p>Enhance your resume with AI suggestions</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">📊</div>
-                        <h3>ATS Score</h3>
-                        <p>Check your ATS compatibility score</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">📥</div>
-                        <h3>Download</h3>
-                        <p>Export in PDF or DOCX format</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                    <strong>
+                        Create account
+                    </strong>
 
-    <script src="script.js"></script>
+                    <span>
+                        Build your first standout resume
+                    </span>
+
+                    <b>
+                        →
+                    </b>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 FORGOT PASSWORD CARD
+                 ================================================= -->
+
+            <article
+                class="auth-card forgot-card"
+                data-card="forgot"
+                tabindex="0"
+                aria-label="Reset your password"
+            >
+
+                <!-- Forgot password card header -->
+                <div class="card-top">
+
+                    <!-- Forgot password icon -->
+                    <span class="card-icon">
+                        ⌁
+                    </span>
+
+                    <!-- Card heading -->
+                    <span class="card-kicker">
+                        Need a hand?
+                    </span>
+
+                    <!-- Status badge -->
+                    <span class="active-chip">
+                        Active
+                    </span>
+
+                </div>
+
+
+                <!-- Forgot password content -->
+                <div class="card-body">
+
+                    <!-- Heading -->
+                    <h2>
+                        Get back on<br>
+                        your path.
+                    </h2>
+
+
+                    <!-- Description -->
+                    <p class="card-description">
+                        Enter your email and we’ll send a secure link
+                        to reset your password.
+                    </p>
+
+
+                    <!-- Forgot password messages -->
+                    <div
+                        class="message"
+                        id="forgotMessage"
+                        role="status"
+                    ></div>
+
+
+                    <!-- =================================================
+                         FORGOT PASSWORD FORM
+                         ================================================= -->
+
+                    <form id="forgotForm">
+
+                        <!-- Email field -->
+                        <label>
+                            Email address
+
+                            <input
+                                id="forgot-email"
+                                type="email"
+                                placeholder="you@example.com"
+                                autocomplete="email"
+                                required
+                            >
+                        </label>
+
+
+                        <!-- Send reset link -->
+                        <button
+                            class="primary-button"
+                            type="submit"
+                        >
+                            Send reset link <span>→</span>
+                        </button>
+
+                    </form>
+
+
+                    <!-- Return to login -->
+                    <p class="form-foot">
+
+                        Remembered it?
+
+                        <button
+                            class="text-button"
+                            type="button"
+                            data-switch="login"
+                        >
+                            Back to log in
+                        </button>
+
+                    </p>
+
+                </div>
+
+
+                <!-- Compact forgot-password card -->
+                <div class="compact-content">
+
+                    <strong>
+                        Forgot password?
+                    </strong>
+
+                    <span>
+                        Reset it securely in minutes
+                    </span>
+
+                    <b>
+                        →
+                    </b>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- =====================================================
+             PRIVACY / SECURITY MESSAGE
+             ===================================================== -->
+
+        <p class="privacy-note">
+            Your career data stays private and protected.
+        </p>
+
+    </main>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+         ========================================================= -->
+
+    <!--
+        Main JavaScript file.
+
+        This file will control:
+        - Login
+        - Signup
+        - Forgot password
+        - Switching between cards
+        - Validation
+        - User interaction
+    -->
+    <script src="script-new.js"></script>
+
 </body>
+
 </html>

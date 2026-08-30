@@ -1,604 +1,1508 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ============================================================
+   ROOT VARIABLES
+   ------------------------------------------------------------
+   Central place for the main colors and reusable values.
+   Changing a variable here can change it throughout the website.
+   ============================================================ */
+
+:root {
+    --ink: #172138;
+    --muted: #687085;
+    --line: rgba(35, 44, 71, .12);
+    --violet: #6857e7;
+    --paper: rgba(255, 255, 255, .76);
+
+    /* Animation timing function */
+    --ease: cubic-bezier(.4, 0, .2, 1)
 }
+
+
+/* ============================================================
+   GLOBAL BOX SIZING
+   ============================================================ */
+
+/*
+   Makes width and height calculations easier.
+
+   With border-box:
+   width includes:
+   - content
+   - padding
+   - border
+*/
+
+* {
+    box-sizing: border-box
+}
+
+
+/* ============================================================
+   BODY / PAGE BASE STYLES
+   ============================================================ */
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.container {
-    width: 100%;
-    max-width: 1200px;
-}
-
-.page {
-    display: none;
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-.page.active {
-    display: flex;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Message Styles */
-.message {
-    padding: 12px 16px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    display: none;
-    font-weight: 500;
-}
-
-.message.show {
-    display: block;
-}
-
-.message.success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-}
-
-.message.error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-}
-
-/* Login Page */
-.login-page {
-    gap: 40px;
-    align-items: center;
-}
-
-.login-left {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.login-left h1 {
-    font-size: 3.5rem;
-    font-weight: 700;
-    color: #1a1a2e;
-    margin-bottom: 20px;
-    line-height: 1.2;
-}
-
-.login-left .highlight {
-    background: linear-gradient(90deg, #7c3aed 0%, #a855f7 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.login-left p {
-    font-size: 1.1rem;
-    color: #555;
-    margin-bottom: 30px;
-    line-height: 1.6;
-}
-
-.login-right {
-    flex: 1;
-    background: white;
-    border-radius: 20px;
-    padding: 50px 40px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-}
-
-.login-right h2 {
-    font-size: 1.8rem;
-    color: #1a1a2e;
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-.form-group {
-    margin-bottom: 25px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: #1a1a2e;
-    font-weight: 600;
-    font-size: 0.95rem;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 12px 16px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    background: #f8f9fa;
-}
-
-.form-group input:focus {
-    outline: none;
-    border-color: #7c3aed;
-    background: white;
-    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
-}
-
-.remember-forgot {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-    font-size: 0.95rem;
-}
-
-.remember-forgot label {
-    display: flex;
-    align-items: center;
     margin: 0;
-    color: #555;
-    cursor: pointer;
+    overflow-x: hidden;
+
+    /* Main text color */
+    color: var(--ink);
+
+    /* Main website font */
+    font-family: "DM Sans", sans-serif;
+
+    /* Base background */
+    background: #f6f5fb
 }
 
-.remember-forgot input[type="checkbox"] {
-    width: auto;
-    margin-right: 8px;
-    cursor: pointer;
+
+/* ============================================================
+   MAIN BACKGROUND GRADIENT
+   ============================================================ */
+
+/*
+   ::before creates a background layer behind the page.
+*/
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+
+    background: linear-gradient(
+        127deg,
+        #f9f9fd 0%,
+        #eff0fb 48%,
+        #f8f6f2 100%
+    )
 }
 
-.forgot-password {
-    color: #7c3aed;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-    cursor: pointer;
+
+/* ============================================================
+   BACKGROUND GRID / PATTERN
+   ============================================================ */
+
+/*
+   Creates the subtle grid pattern visible in the background.
+*/
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+
+    opacity: .36;
+
+    background-image:
+        linear-gradient(
+            rgba(104, 87, 231, .035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(104, 87, 231, .035) 1px,
+            transparent 1px
+        );
+
+    background-size: 36px 36px;
+
+    mask-image: linear-gradient(
+        to bottom,
+        #000,
+        transparent
+    )
 }
 
-.forgot-password:hover {
-    color: #a855f7;
+
+/* ============================================================
+   AMBIENT BACKGROUND EFFECTS
+   ============================================================ */
+
+/*
+   These are the blurred decorative circles/glows
+   in the background.
+*/
+
+.ambient {
+    position: fixed;
+    z-index: -1;
+
+    border-radius: 999px;
+
+    /* Blurs the circular background effect */
+    filter: blur(8px);
+
+    /* Prevents the element from interfering with clicks */
+    pointer-events: none
 }
 
-.login-btn {
-    width: 100%;
-    padding: 14px 24px;
-    background: linear-gradient(90deg, #7c3aed 0%, #a855f7 100%);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.05rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-bottom: 20px;
+
+/* ------------------------------------------------------------
+   TOP-RIGHT AMBIENT GLOW
+   ------------------------------------------------------------ */
+
+.ambient-one {
+    width: 34rem;
+    height: 34rem;
+
+    top: -16rem;
+    right: -5rem;
+
+    background: radial-gradient(
+        circle,
+        rgba(176, 154, 255, .31),
+        rgba(176, 154, 255, 0) 68%
+    )
 }
 
-.login-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(124, 58, 237, 0.3);
+
+/* ------------------------------------------------------------
+   BOTTOM-LEFT AMBIENT GLOW
+   ------------------------------------------------------------ */
+
+.ambient-two {
+    width: 29rem;
+    height: 29rem;
+
+    bottom: -13rem;
+    left: 12%;
+
+    background: radial-gradient(
+        circle,
+        rgba(105, 213, 202, .2),
+        rgba(105, 213, 202, 0) 70%
+    )
 }
 
-.login-btn:active {
-    transform: translateY(0);
-}
 
-.divider {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #999;
-    position: relative;
-}
+/* ============================================================
+   MAIN AUTHENTICATION LAYOUT
+   ============================================================ */
 
-.divider::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 30%;
-    height: 1px;
-    background: #ddd;
-}
+/*
+   Main container for the entire login/signup page.
 
-.divider::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: 0;
-    width: 30%;
-    height: 1px;
-    background: #ddd;
-}
+   Desktop layout:
 
-.social-login {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 25px;
-}
+   ┌───────────────────────────────────────────┐
+   │                  LOGO                     │
+   ├───────────────────┬───────────────────────┤
+   │                   │                       │
+   │   INTRODUCTION    │    AUTH CARDS        │
+   │                   │                       │
+   ├───────────────────┴───────────────────────┤
+   │              PRIVACY NOTE                 │
+   └───────────────────────────────────────────┘
+*/
 
-.social-btn {
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #1a1a2e;
-}
-
-.social-btn:hover {
-    border-color: #7c3aed;
-    background: #f8f9fa;
-}
-
-.signup-link {
-    text-align: center;
-    color: #555;
-    font-size: 0.95rem;
-}
-
-.signup-link a {
-    color: #7c3aed;
-    text-decoration: none;
-    font-weight: 600;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.signup-link a:hover {
-    color: #a855f7;
-}
-
-.security-note {
-    text-align: center;
-    color: #999;
-    font-size: 0.85rem;
-    margin-top: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-}
-
-/* Signup Page */
-.signup-page {
-    gap: 40px;
-    align-items: center;
-}
-
-.signup-left {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.signup-left img {
-    width: 100%;
-    max-width: 500px;
-    border-radius: 15px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-}
-
-.signup-right {
-    flex: 1;
-    background: white;
-    border-radius: 20px;
-    padding: 50px 40px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-    max-height: 90vh;
-    overflow-y: auto;
-}
-
-.signup-right h2 {
-    font-size: 1.8rem;
-    color: #1a1a2e;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.signup-right .subtitle {
-    text-align: center;
-    color: #999;
-    margin-bottom: 30px;
-    font-size: 0.95rem;
-}
-
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
-
-.form-row.full {
-    grid-template-columns: 1fr;
-}
-
-.password-strength {
-    margin-top: 8px;
-}
-
-.strength-meter {
-    height: 4px;
-    background: #e0e0e0;
-    border-radius: 2px;
-    margin-bottom: 5px;
-    overflow: hidden;
-}
-
-.strength-meter.weak {
-    background: #ff4444;
-}
-
-.strength-meter.medium {
-    background: #ffbb33;
-}
-
-.strength-meter.strong {
-    background: #00C851;
-}
-
-#strengthText {
-    font-size: 0.8rem;
-    color: #999;
-}
-
-.signup-btn {
-    width: 100%;
-    padding: 14px 24px;
-    background: linear-gradient(90deg, #7c3aed 0%, #a855f7 100%);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.05rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-bottom: 20px;
-    margin-top: 10px;
-}
-
-.signup-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(124, 58, 237, 0.3);
-}
-
-.signup-btn:active {
-    transform: translateY(0);
-}
-
-.login-link {
-    text-align: center;
-    color: #555;
-    font-size: 0.95rem;
-}
-
-.login-link a {
-    color: #7c3aed;
-    text-decoration: none;
-    font-weight: 600;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.login-link a:hover {
-    color: #a855f7;
-}
-
-.terms {
-    text-align: center;
-    font-size: 0.85rem;
-    color: #999;
-    margin-top: 15px;
-    line-height: 1.5;
-}
-
-.terms a {
-    color: #7c3aed;
-    text-decoration: none;
-}
-
-.terms a:hover {
-    text-decoration: underline;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 30px;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #1a1a2e;
-}
-
-.logo-icon {
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.5rem;
-}
-
-/* Dashboard Page */
-.dashboard-page {
-    flex-direction: column;
-    width: 100%;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+.auth-shell {
+    width: min(1220px, calc(100% - 48px));
     min-height: 100vh;
-}
 
-.dashboard-header {
-    background: linear-gradient(90deg, #7c3aed 0%, #a855f7 100%);
-    color: white;
-    padding: 25px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.2);
-}
+    margin: auto;
 
-.dashboard-header .logo {
-    margin-bottom: 0;
-    color: white;
-}
-
-.dashboard-header .logo-icon {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.user-info span {
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-
-.logout-btn {
-    padding: 10px 20px;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    border: 2px solid white;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.logout-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
-}
-
-.dashboard-content {
-    padding: 50px 40px;
-    flex: 1;
-}
-
-.dashboard-content h1 {
-    font-size: 2.5rem;
-    color: #1a1a2e;
-    margin-bottom: 15px;
-}
-
-.dashboard-content > p {
-    font-size: 1.1rem;
-    color: #666;
-    margin-bottom: 40px;
-}
-
-.features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
+
+    /* Left = introduction
+       Right = login/signup cards */
+    grid-template-columns: .78fr 1.22fr;
+
+    grid-template-rows: auto 1fr auto;
+
+    column-gap: 74px;
+
+    padding: 34px 0 25px
 }
 
-.feature-card {
-    padding: 30px;
-    background: linear-gradient(135deg, #f5f7fa 0%, #f0f3f7 100%);
-    border-radius: 15px;
-    text-align: center;
-    transition: all 0.3s ease;
-    border: 1px solid #e0e0e0;
+
+/* ============================================================
+   RESUME.AI BRAND / LOGO
+   ============================================================ */
+
+.brand {
+    /* Logo occupies the entire first row */
+    grid-column: 1/-1;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    width: max-content;
+
+    color: var(--ink);
+    text-decoration: none;
+
+    font-size: 1.27rem;
+    font-weight: 700;
+
+    letter-spacing: -.06em
 }
 
-.feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(124, 58, 237, 0.1);
-    background: white;
-    border-color: #7c3aed;
+
+/* ".ai" portion of the logo */
+.brand>span:last-child span {
+    color: var(--violet)
 }
 
-.feature-icon {
-    font-size: 3rem;
-    margin-bottom: 15px;
+
+/* ------------------------------------------------------------
+   LOGO ICON
+   ------------------------------------------------------------ */
+
+.brand-mark {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: flex-end;
+
+    gap: 3px;
+    padding: 6px;
+
+    border-radius: 9px;
+
+    background: linear-gradient(
+        135deg,
+        #6b5de8,
+        #9c7aec
+    )
 }
 
-.feature-card h3 {
-    font-size: 1.2rem;
-    color: #1a1a2e;
-    margin-bottom: 10px;
+
+/* Three bars inside the logo */
+.brand-mark i {
+    display: block;
+
+    width: 4px;
+
+    border-radius: 4px;
+
+    background: white
 }
 
-.feature-card p {
-    color: #666;
-    font-size: 0.95rem;
+
+/* First bar */
+.brand-mark i:nth-child(1) {
+    height: 8px
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .login-page,
-    .signup-page {
-        flex-direction: column;
-        gap: 30px;
-    }
 
-    .login-left h1 {
-        font-size: 2.5rem;
-    }
+/* Second bar */
+.brand-mark i:nth-child(2) {
+    height: 14px
+}
 
-    .login-right,
-    .signup-right {
-        padding: 40px 25px;
-    }
 
-    .social-login {
+/* Third bar */
+.brand-mark i:nth-child(3) {
+    height: 18px
+}
+
+
+/* ============================================================
+   INTRODUCTION / HERO SECTION
+   ============================================================ */
+
+.intro {
+    align-self: center;
+
+    padding-bottom: 32px
+}
+
+
+/* Small uppercase heading */
+.eyebrow {
+    margin: 0 0 20px;
+
+    color: var(--violet);
+
+    font-size: .72rem;
+    font-weight: 700;
+
+    letter-spacing: .13em;
+
+    text-transform: uppercase
+}
+
+
+/* ------------------------------------------------------------
+   MAIN INTRODUCTION HEADING
+   ------------------------------------------------------------ */
+
+.intro h1 {
+    max-width: 420px;
+
+    margin: 0;
+
+    /* Decorative heading font */
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(3rem, 4.4vw, 4.75rem);
+
+    line-height: 1.04;
+
+    letter-spacing: -.065em;
+
+    font-weight: 600
+}
+
+
+/* Highlighted word inside heading */
+.intro h1 em {
+    color: var(--violet);
+
+    font-weight: 600
+}
+
+
+/* Introduction paragraph */
+.intro>p:not(.eyebrow) {
+    max-width: 340px;
+
+    margin: 25px 0 28px;
+
+    color: var(--muted);
+
+    font-size: 1rem;
+
+    line-height: 1.72
+}
+
+
+/* ============================================================
+   SOCIAL PROOF / TRUST SECTION
+   ============================================================ */
+
+.proof {
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    max-width: 290px;
+
+    color: #596177;
+
+    font-size: .74rem;
+
+    line-height: 1.35
+}
+
+
+/* Container for avatars */
+.avatars {
+    display: flex
+}
+
+
+/* Individual avatar */
+.avatars i {
+    display: grid;
+    place-items: center;
+
+    width: 27px;
+    height: 27px;
+
+    margin-right: -7px;
+
+    border: 2px solid #f5f5fb;
+
+    border-radius: 50%;
+
+    color: white;
+
+    background: #e8966c;
+
+    font-style: normal;
+
+    font-size: .65rem
+}
+
+
+/* Second avatar */
+.avatars i:nth-child(2) {
+    background: #8b79dd
+}
+
+
+/* Third avatar */
+.avatars i:nth-child(3) {
+    background: #5ebaae
+}
+
+
+/* ============================================================
+   AUTHENTICATION CARD AREA
+   ============================================================ */
+
+.card-stage {
+    position: relative;
+
+    align-self: center;
+
+    width: 100%;
+
+    /*
+       The card area adapts to the viewport height.
+    */
+    height: min(676px, 76vh);
+
+    min-height: 590px
+}
+
+
+/* ============================================================
+   COMMON AUTH CARD STYLES
+   ============================================================ */
+
+.auth-card {
+    /*
+       All three cards are positioned on top of each other
+       and JavaScript/CSS controls their positions.
+    */
+    position: absolute;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(255, 255, 255, .84);
+
+    border-radius: 27px;
+
+    background: var(--paper);
+
+    /*
+       Shadow creates the floating-card appearance.
+    */
+    box-shadow:
+        0 20px 60px rgba(54, 51, 99, .11),
+        0 2px 8px rgba(35, 33, 69, .04);
+
+    /*
+       Glass/frosted effect.
+    */
+    backdrop-filter: blur(18px);
+
+    cursor: pointer;
+
+    /*
+       Animation when cards move between positions.
+    */
+    transition:
+        left 650ms var(--ease),
+        top 650ms var(--ease),
+        width 650ms var(--ease),
+        height 650ms var(--ease),
+        opacity 450ms var(--ease),
+        box-shadow 300ms ease,
+        transform 300ms ease
+}
+
+
+/* Card hover effect */
+.auth-card:hover {
+    box-shadow:
+        0 24px 68px rgba(84, 67, 177, .21),
+        0 4px 12px rgba(35, 33, 69, .06);
+
+    transform: scale(1.02)
+}
+
+
+/* Active card should not grow when hovered */
+.auth-card.active:hover {
+    transform: none
+}
+
+
+/* Active card appears above other cards */
+.auth-card.active {
+    cursor: default;
+    z-index: 3
+}
+
+
+/* Inactive cards stay behind */
+.auth-card:not(.active) {
+    z-index: 1
+}
+
+
+/* Bring inactive card slightly forward when hovered */
+.auth-card:not(.active):hover {
+    z-index: 2
+}
+
+
+/* ============================================================
+   DESKTOP CARD POSITIONS
+   ============================================================ */
+
+/*
+   When LOGIN is active:
+   Login becomes the large card.
+*/
+
+.card-stage[data-active="login"] .login-card,
+
+/*
+   When SIGNUP is active:
+   Signup becomes the large card.
+*/
+
+.card-stage[data-active="signup"] .signup-card,
+
+/*
+   When FORGOT is active:
+   Forgot password becomes the large card.
+*/
+
+.card-stage[data-active="forgot"] .forgot-card {
+
+    left: 0;
+    top: 0;
+
+    width: 64%;
+    height: 100%;
+
+    opacity: 1
+}
+
+
+/*
+   Position one inactive card at the top-right.
+*/
+
+.card-stage[data-active="login"] .signup-card,
+
+.card-stage[data-active="signup"] .login-card,
+
+.card-stage[data-active="forgot"] .signup-card {
+
+    left: 68%;
+    top: 8%;
+
+    width: 32%;
+    height: 39%;
+
+    opacity: .92
+}
+
+
+/*
+   Position the other inactive card at the bottom-right.
+*/
+
+.card-stage[data-active="login"] .forgot-card,
+
+.card-stage[data-active="signup"] .forgot-card,
+
+.card-stage[data-active="forgot"] .login-card {
+
+    left: 68%;
+    top: 53%;
+
+    width: 32%;
+    height: 39%;
+
+    opacity: .92
+}
+
+
+/* ============================================================
+   CARD HEADER
+   ============================================================ */
+
+.card-top {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    height: 56px;
+
+    padding: 0 24px;
+
+    border-bottom: 1px solid var(--line)
+}
+
+
+/* Small icon inside card header */
+.card-icon {
+    display: grid;
+    place-items: center;
+
+    width: 24px;
+    height: 24px;
+
+    border-radius: 7px;
+
+    color: #fff;
+
+    background: linear-gradient(
+        135deg,
+        #7667ec,
+        #a483ef
+    );
+
+    font-size: .82rem
+}
+
+
+/* Small uppercase card title */
+.card-kicker {
+    color: #737a8d;
+
+    font-size: .75rem;
+    font-weight: 700;
+
+    letter-spacing: .055em;
+
+    text-transform: uppercase
+}
+
+
+/* Active badge */
+.active-chip {
+    margin-left: auto;
+
+    padding: 4px 8px;
+
+    border-radius: 99px;
+
+    color: #5e50ca;
+
+    background: #eeeaff;
+
+    font-size: .64rem;
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: .07em
+}
+
+
+/* Hide active badge on inactive cards */
+.auth-card:not(.active) .active-chip {
+    display: none
+}
+
+
+/* ============================================================
+   CARD BODY
+   ============================================================ */
+
+.card-body {
+    padding: clamp(30px, 4vw, 50px)
+}
+
+
+/* Main heading inside authentication card */
+.card-body h2 {
+    margin: 0;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(2rem, 3.1vw, 3.05rem);
+
+    line-height: 1.08;
+
+    letter-spacing: -.055em
+}
+
+
+/* Description under card heading */
+.card-description {
+    max-width: 355px;
+
+    margin: 15px 0 25px;
+
+    color: var(--muted);
+
+    font-size: .9rem;
+
+    line-height: 1.6
+}
+
+
+/* ============================================================
+   FORMS
+   ============================================================ */
+
+/* Form layout */
+form {
+    display: grid;
+
+    gap: 14px
+}
+
+
+/* Form labels */
+form label {
+    color: #4b5367;
+
+    font-size: .75rem;
+
+    font-weight: 700
+}
+
+
+/* ============================================================
+   INPUT FIELDS
+   ============================================================ */
+
+input {
+    display: block;
+
+    width: 100%;
+
+    height: 45px;
+
+    margin-top: 7px;
+
+    padding: 0 13px;
+
+    border: 1px solid rgba(48, 55, 80, .14);
+
+    border-radius: 10px;
+
+    outline: none;
+
+    color: var(--ink);
+
+    background: rgba(255, 255, 255, .72);
+
+    font: inherit;
+
+    font-size: .88rem;
+
+    transition:
+        border .2s ease,
+        box-shadow .2s ease,
+        background .2s ease
+}
+
+
+/* Input focus effect */
+input:focus {
+    border-color: #8b7ce9;
+
+    background: #fff;
+
+    box-shadow: 0 0 0 4px rgba(116, 97, 226, .13)
+}
+
+
+/* ============================================================
+   SIGNUP NAME FIELDS
+   ============================================================ */
+
+.name-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px
+}
+
+
+/* ============================================================
+   LOGIN FORM OPTIONS
+   ============================================================ */
+
+.form-options {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: -2px
+}
+
+
+/* Remember-me checkbox */
+.check-label {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    color: var(--muted);
+
+    font-size: .75rem;
+
+    font-weight: 500
+}
+
+
+/* Checkbox itself */
+.check-label input {
+    display: inline-block;
+
+    width: 14px;
+    height: 14px;
+
+    margin: 0;
+
+    accent-color: var(--violet)
+}
+
+
+/* ============================================================
+   PRIMARY BUTTON
+   ============================================================ */
+
+.primary-button {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 14px;
+
+    width: 100%;
+
+    height: 47px;
+
+    margin-top: 4px;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    color: #fff;
+
+    background: linear-gradient(
+        105deg,
+        var(--violet),
+        #8974ec
+    );
+
+    box-shadow:
+        0 10px 20px rgba(104, 87, 231, .24);
+
+    font: 700 .85rem "DM Sans", sans-serif;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease
+}
+
+
+/* Primary button hover */
+.primary-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 13px 25px rgba(104, 87, 231, .32)
+}
+
+
+/* Arrow inside primary button */
+.primary-button span {
+    font-size: 1.1rem
+}
+
+
+/* ============================================================
+   TEXT BUTTONS
+   ============================================================ */
+
+.text-button {
+    padding: 0;
+
+    border: 0;
+
+    color: #5c4bd0;
+
+    background: none;
+
+    font: 600 .75rem "DM Sans", sans-serif;
+
+    cursor: pointer
+}
+
+
+/* Text button hover */
+.text-button:hover {
+    color: #3427a1;
+
+    text-decoration: underline
+}
+
+
+/* ============================================================
+   FORM FOOTER
+   ============================================================ */
+
+.form-foot {
+    margin: 20px 0 0;
+
+    color: var(--muted);
+
+    font-size: .76rem;
+
+    text-align: center
+}
+
+
+/* ============================================================
+   SUCCESS / ERROR MESSAGES
+   ============================================================ */
+
+.message {
+    display: none;
+
+    padding: 10px 12px;
+
+    border-radius: 9px;
+
+    font-size: .76rem;
+
+    line-height: 1.4
+}
+
+
+/* Show message when JavaScript adds "show" */
+.message.show {
+    display: block
+}
+
+
+/* Error message */
+.message.error {
+    color: #a33347;
+
+    background: #fff0f2
+}
+
+
+/* Success message */
+.message.success {
+    color: #19775d;
+
+    background: #eaf9f3
+}
+
+
+/* ============================================================
+   COMPACT / INACTIVE CARD CONTENT
+   ============================================================ */
+
+/*
+   When a card is inactive, its full form disappears
+   and this compact version becomes visible.
+*/
+
+.compact-content {
+    display: none;
+
+    position: relative;
+
+    height: calc(100% - 56px);
+
+    padding: 18px 20px
+}
+
+
+/* Compact card title */
+.compact-content strong {
+    display: block;
+
+    max-width: 140px;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(1rem, 1.35vw, 1.35rem);
+
+    line-height: 1.1;
+
+    letter-spacing: -.04em
+}
+
+
+/* Compact card description */
+.compact-content span {
+    display: block;
+
+    max-width: 170px;
+
+    margin-top: 7px;
+
+    color: #778094;
+
+    font-size: .69rem;
+
+    line-height: 1.45
+}
+
+
+/* Arrow on compact card */
+.compact-content b {
+    position: absolute;
+
+    right: 20px;
+    bottom: 17px;
+
+    color: var(--violet);
+
+    font-size: 1.25rem
+}
+
+
+/* Hide full form on inactive card */
+.auth-card:not(.active) .card-body {
+    display: none
+}
+
+
+/* Show compact version on inactive card */
+.auth-card:not(.active) .compact-content {
+    display: block
+}
+
+
+/* ============================================================
+   PRIVACY NOTE
+   ============================================================ */
+
+.privacy-note {
+    grid-column: 1/-1;
+
+    margin: 0;
+
+    align-self: end;
+
+    color: #9298a8;
+
+    font-size: .7rem
+}
+
+
+/* ============================================================
+   TABLET / SMALL DESKTOP
+   max-width: 900px
+   ============================================================ */
+
+@media(max-width:900px) {
+
+    /*
+       Change the main layout from two columns
+       to one column.
+    */
+
+    .auth-shell {
         grid-template-columns: 1fr;
-    }
 
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-
-    .dashboard-header {
-        flex-direction: column;
         gap: 15px;
-        text-align: center;
+
+        padding-top: 25px
     }
 
-    .dashboard-content {
-        padding: 30px 20px;
+
+    /* Move intro section to normal vertical layout */
+    .intro {
+        padding: 30px 0 0
     }
 
-    .dashboard-content h1 {
-        font-size: 1.8rem;
+
+    /* Smaller heading */
+    .intro h1 {
+        font-size: 3rem
     }
 
-    .features-grid {
-        grid-template-columns: 1fr;
+
+    /*
+       Hide supporting text on smaller screens
+       to save space.
+    */
+
+    .intro>p:not(.eyebrow),
+    .proof {
+        display: none
+    }
+
+
+    /* Authentication cards become taller */
+    .card-stage {
+        height: 640px
+    }
+
+
+    /* Hide privacy note */
+    .privacy-note {
+        display: none
+    }
+}
+
+
+/* ============================================================
+   MOBILE
+   max-width: 590px
+   ============================================================ */
+
+@media(max-width:590px) {
+
+    /* Allow vertical scrolling on mobile */
+    body {
+        overflow: auto
+    }
+
+
+    /* Smaller container width */
+    .auth-shell {
+        width: min(100% - 28px, 500px);
+
+        padding-bottom: 20px
+    }
+
+
+    /* Smaller intro spacing */
+    .intro {
+        padding-top: 18px
+    }
+
+
+    /* Smaller eyebrow spacing */
+    .eyebrow {
+        margin-bottom: 10px
+    }
+
+
+    /* Smaller main heading */
+    .intro h1 {
+        font-size: 2.45rem
+    }
+
+
+    /* Taller card area */
+    .card-stage {
+        height: 690px;
+
+        min-height: 590px
+    }
+
+
+    /*
+       Active card takes almost the full width
+       on mobile.
+    */
+
+    .card-stage[data-active="login"] .login-card,
+
+    .card-stage[data-active="signup"] .signup-card,
+
+    .card-stage[data-active="forgot"] .forgot-card {
+
+        width: 100%;
+
+        height: 72%
+    }
+
+
+    /*
+       First inactive card appears underneath
+       the active card.
+    */
+
+    .card-stage[data-active="login"] .signup-card,
+
+    .card-stage[data-active="signup"] .login-card,
+
+    .card-stage[data-active="forgot"] .signup-card {
+
+        left: 0;
+
+        top: 75%;
+
+        width: 48%;
+
+        height: 22%
+    }
+
+
+    /*
+       Second inactive card appears beside the first.
+    */
+
+    .card-stage[data-active="login"] .forgot-card,
+
+    .card-stage[data-active="signup"] .forgot-card,
+
+    .card-stage[data-active="forgot"] .login-card {
+
+        left: 52%;
+
+        top: 75%;
+
+        width: 48%;
+
+        height: 22%
+    }
+
+
+    /* Smaller card header padding */
+    .card-top {
+        padding: 0 18px
+    }
+
+
+    /* Smaller card body padding */
+    .card-body {
+        padding: 27px 23px
+    }
+
+
+    /* Smaller card heading */
+    .card-body h2 {
+        font-size: 2.1rem
+    }
+
+
+    /* Smaller description spacing */
+    .card-description {
+        margin: 11px 0 18px
+    }
+
+
+    /* Smaller compact card */
+    .compact-content {
+        padding: 13px 14px
+    }
+
+
+    /* Hide compact description on mobile */
+    .compact-content span {
+        display: none
+    }
+
+
+    /* Position compact arrow */
+    .compact-content b {
+        right: 14px;
+
+        bottom: 10px
+    }
+
+
+    /* Smaller gap between first and last name */
+    .name-row {
+        gap: 8px
+    }
+}
+
+
+/* ============================================================
+   ACCESSIBILITY:
+   REDUCED MOTION
+   ============================================================ */
+
+/*
+   Some users prefer less animation.
+
+   If their operating system has "Reduce Motion"
+   enabled, animations/transitions become almost instant.
+*/
+
+@media(prefers-reduced-motion:reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        transition-duration: .01ms !important;
+
+        animation-duration: .01ms !important
+    }
+}
+
+
+/* ============================================================
+   CARD ANIMATION OPTIMIZATION
+   ============================================================ */
+
+/*
+   Tells the browser that these properties are going to change.
+
+   This can help the browser optimize card animations.
+*/
+
+.auth-card {
+    will-change: left, top, width, height
+}
+
+
+/* ============================================================
+   CARD BODY ANIMATION
+   ============================================================ */
+
+/*
+   The card body is positioned inside the card.
+
+   This allows the form to fade/slide when switching cards.
+*/
+
+.card-body {
+    position: absolute;
+
+    inset: 56px 0 0;
+
+    overflow: auto;
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+    visibility: visible;
+
+    transition:
+        opacity 180ms ease 280ms,
+        transform 260ms var(--ease) 280ms,
+        visibility 0s linear 280ms
+}
+
+
+/* ============================================================
+   COMPACT CONTENT ANIMATION
+   ============================================================ */
+
+.compact-content {
+    display: block;
+
+    position: absolute;
+
+    inset: 56px 0 0;
+
+    height: auto;
+
+    padding: 18px 20px;
+
+    opacity: 0;
+
+    transform: translateY(10px);
+
+    visibility: hidden;
+
+    /*
+       Prevent clicks while hidden.
+    */
+    pointer-events: none;
+
+    transition:
+        opacity 180ms ease,
+        transform 260ms var(--ease),
+        visibility 0s linear 180ms
+}
+
+
+/* ============================================================
+   INACTIVE CARD BODY
+   ============================================================ */
+
+/*
+   When the card becomes inactive:
+
+   - Fade the form out
+   - Move it slightly upward
+   - Hide it
+   - Prevent interaction
+*/
+
+.auth-card:not(.active) .card-body {
+
+    display: block;
+
+    opacity: 0;
+
+    transform: translateY(-10px);
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity 130ms ease,
+        transform 180ms var(--ease),
+        visibility 0s linear 180ms
+}
+
+
+/* ============================================================
+   INACTIVE CARD COMPACT CONTENT
+   ============================================================ */
+
+/*
+   When a card is inactive:
+
+   - Compact content becomes visible
+   - It fades in
+   - It moves into its normal position
+   - It becomes clickable
+*/
+
+.auth-card:not(.active) .compact-content {
+
+    display: block;
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transition:
+        opacity 180ms ease 280ms,
+        transform 260ms var(--ease) 280ms,
+        visibility 0s linear 280ms
+}
+
+
+/* ============================================================
+   MOBILE COMPACT CONTENT
+   ============================================================ */
+
+@media(max-width:590px) {
+
+    .compact-content {
+        padding: 13px 14px
+    }
+
+
+    .compact-content b {
+        right: 14px;
+
+        bottom: 10px
+    }
+}
+
+
+/* ============================================================
+   REDUCED MOTION — CARD ANIMATIONS
+   ============================================================ */
+
+/*
+   Again respects the user's reduced-motion preference,
+   specifically for the authentication card animations.
+*/
+
+@media(prefers-reduced-motion:reduce) {
+
+    .card-body,
+    .compact-content,
+    .auth-card {
+
+        transition-duration: .01ms !important;
+
+        transition-delay: 0s !important
     }
 }
