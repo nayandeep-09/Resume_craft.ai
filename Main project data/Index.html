@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResumePro - Build, Optimize, Get Hired</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Login Page -->
+        <div class="page login-page active">
+            <div class="login-left">
+                <h1>Create a Resume<br>That <span class="highlight">Opens Doors</span></h1>
+                <p>Create, update and optimize your resume with powerful AI tools and real-time ATS analysis.</p>
+            </div>
+
+            <div class="login-right">
+                <h2>Welcome Back! 👋</h2>
+                <p style="text-align: center; color: #999; margin-bottom: 30px; font-size: 0.95rem;">Login to continue building your future</p>
+
+                <div id="loginMessage" class="message"></div>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <input type="email" id="login-email" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" placeholder="Enter your password" required>
+                    </div>
+
+                    <div class="remember-forgot">
+                        <label>
+                            <input type="checkbox" id="rememberMe">
+                            Remember me
+                        </label>
+                        <a href="#" class="forgot-password" onclick="handleForgotPassword(event)">Forgot Password?</a>
+                    </div>
+
+                    <button type="submit" class="login-btn">Login</button>
+                </form>
+
+                <div class="divider">or continue with</div>
+
+                <div class="social-login">
+                    <button type="button" class="social-btn">
+                        <span>🔍 Google</span>
+                    </button>
+                    <button type="button" class="social-btn">
+                        <span>⊞ Microsoft</span>
+                    </button>
+                    <button type="button" class="social-btn">
+                        <span>in LinkedIn</span>
+                    </button>
+                </div>
+
+                <div class="signup-link">
+                    Don't have an account? <a onclick="switchPage('signup')">Sign up</a>
+                </div>
+
+                <div class="security-note">
+                    🔒 Your data is secure with us
+                </div>
+            </div>
+        </div>
+
+        <!-- Signup Page -->
+        <div class="page signup-page">
+            <div class="signup-left">
+                <img src="../Research/Images/Login 1st page.png" alt="Resume Building" onerror="this.style.display='none'">
+            </div>
+
+            <div class="signup-right">
+                <div class="logo">
+                    <div class="logo-icon">📄</div>
+                    ResumePro
+                </div>
+
+                <h2>Create a Resume<br>That <span class="highlight">Gets You Hired</span></h2>
+                <p class="subtitle">Create, update and optimize your resume with powerful AI tools and real-time ATS analysis.</p>
+
+                <div id="signupMessage" class="message"></div>
+
+                <form id="signupForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first-name">First Name</label>
+                            <input type="text" id="first-name" placeholder="Enter your first name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last Name</label>
+                            <input type="text" id="last-name" placeholder="Enter your last name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="signup-email">Email Address</label>
+                            <input type="email" id="signup-email" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="signup-password">Password</label>
+                            <input type="password" id="signup-password" placeholder="Create a strong password" required>
+                            <div class="password-strength">
+                                <div class="strength-meter" id="strengthMeter"></div>
+                                <span id="strengthText"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="confirm-password">Confirm Password</label>
+                            <input type="password" id="confirm-password" placeholder="Confirm your password" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="signup-btn">Create Account</button>
+                </form>
+
+                <div class="login-link">
+                    Already have an account? <a onclick="switchPage('login')">Log in</a>
+                </div>
+
+                <div class="terms">
+                    By signing up, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard (shown after successful login) -->
+        <div class="page dashboard-page">
+            <div class="dashboard-header">
+                <div class="logo">
+                    <div class="logo-icon">📄</div>
+                    ResumePro
+                </div>
+                <div class="user-info">
+                    <span id="userNameDisplay">User</span>
+                    <button class="logout-btn" onclick="handleLogout()">Logout</button>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+                <h1>Welcome to ResumePro, <span id="userFirstName">User</span>! 🎉</h1>
+                <p>You are now logged in and can start building your amazing resume.</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">✍️</div>
+                        <h3>Create Resume</h3>
+                        <p>Build a professional resume from scratch</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">✨</div>
+                        <h3>AI Optimize</h3>
+                        <p>Enhance your resume with AI suggestions</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>ATS Score</h3>
+                        <p>Check your ATS compatibility score</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📥</div>
+                        <h3>Download</h3>
+                        <p>Export in PDF or DOCX format</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
