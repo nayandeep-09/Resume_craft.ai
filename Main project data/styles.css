@@ -70,12 +70,10 @@ body::before {
     inset: 0;
     z-index: -3;
 
-    background: linear-gradient(
-        127deg,
-        #f9f9fd 0%,
-        #eff0fb 48%,
-        #f8f6f2 100%
-    )
+    background: linear-gradient(127deg,
+            #f9f9fd 0%,
+            #eff0fb 48%,
+            #f8f6f2 100%)
 }
 
 
@@ -96,23 +94,17 @@ body::after {
     opacity: .36;
 
     background-image:
-        linear-gradient(
+        linear-gradient(rgba(104, 87, 231, .035) 1px,
+            transparent 1px),
+        linear-gradient(90deg,
             rgba(104, 87, 231, .035) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(104, 87, 231, .035) 1px,
-            transparent 1px
-        );
+            transparent 1px);
 
     background-size: 36px 36px;
 
-    mask-image: linear-gradient(
-        to bottom,
-        #000,
-        transparent
-    )
+    mask-image: linear-gradient(to bottom,
+            #000,
+            transparent)
 }
 
 
@@ -150,11 +142,9 @@ body::after {
     top: -16rem;
     right: -5rem;
 
-    background: radial-gradient(
-        circle,
-        rgba(176, 154, 255, .31),
-        rgba(176, 154, 255, 0) 68%
-    )
+    background: radial-gradient(circle,
+            rgba(176, 154, 255, .31),
+            rgba(176, 154, 255, 0) 68%)
 }
 
 
@@ -169,11 +159,9 @@ body::after {
     bottom: -13rem;
     left: 12%;
 
-    background: radial-gradient(
-        circle,
-        rgba(105, 213, 202, .2),
-        rgba(105, 213, 202, 0) 70%
-    )
+    background: radial-gradient(circle,
+            rgba(105, 213, 202, .2),
+            rgba(105, 213, 202, 0) 70%)
 }
 
 
@@ -264,11 +252,9 @@ body::after {
 
     border-radius: 9px;
 
-    background: linear-gradient(
-        135deg,
-        #6b5de8,
-        #9c7aec
-    )
+    background: linear-gradient(135deg,
+            #6b5de8,
+            #9c7aec)
 }
 
 
@@ -459,6 +445,11 @@ body::after {
    ============================================================ */
 
 .auth-card {
+    /* PERFORMANCE OPTIMIZATION: keep the card's visual state in one rule. */
+    /*
+       Cards still animate between their existing left/top/width/height states
+       so their final positions and dimensions remain exactly unchanged.
+    */
     /*
        All three cards are positioned on top of each other
        and JavaScript/CSS controls their positions.
@@ -497,7 +488,13 @@ body::after {
         height 650ms var(--ease),
         opacity 450ms var(--ease),
         box-shadow 300ms ease,
-        transform 300ms ease
+        transform 300ms ease;
+
+    /*
+       PERFORMANCE OPTIMIZATION: reserve compositing only for hover/content
+       transforms and opacity changes; do not pre-promote layout properties.
+    */
+    will-change: transform, opacity
 }
 
 
@@ -641,11 +638,9 @@ body::after {
 
     color: #fff;
 
-    background: linear-gradient(
-        135deg,
-        #7667ec,
-        #a483ef
-    );
+    background: linear-gradient(135deg,
+            #7667ec,
+            #a483ef);
 
     font-size: .82rem
 }
@@ -696,7 +691,29 @@ body::after {
    ============================================================ */
 
 .card-body {
-    padding: clamp(30px, 4vw, 50px)
+    /*
+       PERFORMANCE OPTIMIZATION: preserve the existing body transition in its
+       source rule. The full form fades and moves slightly when inactive,
+       then visibility and pointer events prevent hidden form interaction.
+    */
+    position: absolute;
+
+    inset: 56px 0 0;
+
+    overflow: auto;
+
+    padding: clamp(30px, 4vw, 50px);
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+    visibility: visible;
+
+    transition:
+        opacity 180ms ease 280ms,
+        transform 260ms var(--ease) 280ms,
+        visibility 0s linear 280ms
 }
 
 
@@ -878,11 +895,9 @@ input:focus {
 
     color: #fff;
 
-    background: linear-gradient(
-        105deg,
-        var(--violet),
-        #8974ec
-    );
+    background: linear-gradient(105deg,
+            var(--violet),
+            #8974ec);
 
     box-shadow:
         0 10px 20px rgba(104, 87, 231, .24);
@@ -1003,13 +1018,33 @@ input:focus {
 */
 
 .compact-content {
-    display: none;
+    /*
+       PERFORMANCE OPTIMIZATION: use opacity/transform instead of display
+       changes. This keeps the compact card content ready to transition while
+       visibility and pointer events keep it inaccessible when hidden.
+    */
+    display: block;
 
-    position: relative;
+    position: absolute;
 
-    height: calc(100% - 56px);
+    inset: 56px 0 0;
 
-    padding: 18px 20px
+    height: auto;
+
+    padding: 18px 20px;
+
+    opacity: 0;
+
+    transform: translateY(10px);
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity 180ms ease,
+        transform 260ms var(--ease),
+        visibility 0s linear 180ms
 }
 
 
@@ -1060,13 +1095,43 @@ input:focus {
 
 /* Hide full form on inactive card */
 .auth-card:not(.active) .card-body {
-    display: none
+    /*
+       PERFORMANCE OPTIMIZATION: fade the existing body without a display
+       toggle, then make its controls unavailable after the transition.
+    */
+    opacity: 0;
+
+    transform: translateY(-10px);
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity 130ms ease,
+        transform 180ms var(--ease),
+        visibility 0s linear 180ms
 }
 
 
 /* Show compact version on inactive card */
 .auth-card:not(.active) .compact-content {
-    display: block
+    /*
+       PERFORMANCE OPTIMIZATION: reveal compact content on the compositor
+       after the full form has transitioned away.
+    */
+    opacity: 1;
+
+    transform: translateY(0);
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transition:
+        opacity 180ms ease 280ms,
+        transform 260ms var(--ease) 280ms,
+        visibility 0s linear 280ms
 }
 
 
@@ -1321,188 +1386,5 @@ input:focus {
         transition-duration: .01ms !important;
 
         animation-duration: .01ms !important
-    }
-}
-
-
-/* ============================================================
-   CARD ANIMATION OPTIMIZATION
-   ============================================================ */
-
-/*
-   Tells the browser that these properties are going to change.
-
-   This can help the browser optimize card animations.
-*/
-
-.auth-card {
-    will-change: left, top, width, height
-}
-
-
-/* ============================================================
-   CARD BODY ANIMATION
-   ============================================================ */
-
-/*
-   The card body is positioned inside the card.
-
-   This allows the form to fade/slide when switching cards.
-*/
-
-.card-body {
-    position: absolute;
-
-    inset: 56px 0 0;
-
-    overflow: auto;
-
-    opacity: 1;
-
-    transform: translateY(0);
-
-    visibility: visible;
-
-    transition:
-        opacity 180ms ease 280ms,
-        transform 260ms var(--ease) 280ms,
-        visibility 0s linear 280ms
-}
-
-
-/* ============================================================
-   COMPACT CONTENT ANIMATION
-   ============================================================ */
-
-.compact-content {
-    display: block;
-
-    position: absolute;
-
-    inset: 56px 0 0;
-
-    height: auto;
-
-    padding: 18px 20px;
-
-    opacity: 0;
-
-    transform: translateY(10px);
-
-    visibility: hidden;
-
-    /*
-       Prevent clicks while hidden.
-    */
-    pointer-events: none;
-
-    transition:
-        opacity 180ms ease,
-        transform 260ms var(--ease),
-        visibility 0s linear 180ms
-}
-
-
-/* ============================================================
-   INACTIVE CARD BODY
-   ============================================================ */
-
-/*
-   When the card becomes inactive:
-
-   - Fade the form out
-   - Move it slightly upward
-   - Hide it
-   - Prevent interaction
-*/
-
-.auth-card:not(.active) .card-body {
-
-    display: block;
-
-    opacity: 0;
-
-    transform: translateY(-10px);
-
-    visibility: hidden;
-
-    pointer-events: none;
-
-    transition:
-        opacity 130ms ease,
-        transform 180ms var(--ease),
-        visibility 0s linear 180ms
-}
-
-
-/* ============================================================
-   INACTIVE CARD COMPACT CONTENT
-   ============================================================ */
-
-/*
-   When a card is inactive:
-
-   - Compact content becomes visible
-   - It fades in
-   - It moves into its normal position
-   - It becomes clickable
-*/
-
-.auth-card:not(.active) .compact-content {
-
-    display: block;
-
-    opacity: 1;
-
-    transform: translateY(0);
-
-    visibility: visible;
-
-    pointer-events: auto;
-
-    transition:
-        opacity 180ms ease 280ms,
-        transform 260ms var(--ease) 280ms,
-        visibility 0s linear 280ms
-}
-
-
-/* ============================================================
-   MOBILE COMPACT CONTENT
-   ============================================================ */
-
-@media(max-width:590px) {
-
-    .compact-content {
-        padding: 13px 14px
-    }
-
-
-    .compact-content b {
-        right: 14px;
-
-        bottom: 10px
-    }
-}
-
-
-/* ============================================================
-   REDUCED MOTION — CARD ANIMATIONS
-   ============================================================ */
-
-/*
-   Again respects the user's reduced-motion preference,
-   specifically for the authentication card animations.
-*/
-
-@media(prefers-reduced-motion:reduce) {
-
-    .card-body,
-    .compact-content,
-    .auth-card {
-
-        transition-duration: .01ms !important;
-
-        transition-delay: 0s !important
     }
 }
