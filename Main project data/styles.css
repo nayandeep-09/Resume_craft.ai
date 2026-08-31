@@ -332,7 +332,12 @@ body::after {
 
     letter-spacing: -.065em;
 
-    font-weight: 600
+    font-weight: 600;
+
+    /* PERFORMANCE OPTIMIZATION: dynamic copy fades/slides without layout animation. */
+    transition:
+        opacity 160ms var(--ease),
+        transform 220ms var(--ease)
 }
 
 
@@ -354,7 +359,21 @@ body::after {
 
     font-size: 1rem;
 
-    line-height: 1.72
+    line-height: 1.72;
+
+    /* PERFORMANCE OPTIMIZATION: uses the same lightweight transition as the heading. */
+    transition:
+        opacity 160ms var(--ease),
+        transform 220ms var(--ease)
+}
+
+
+/* PERFORMANCE OPTIMIZATION: hide outgoing copy before the existing elements receive new text. */
+.intro.is-transitioning h1,
+.intro.is-transitioning>p:not(.eyebrow) {
+    opacity: 0;
+
+    transform: translateY(-8px)
 }
 
 

@@ -9,6 +9,60 @@ const stage = document.querySelector('.card-stage');
 // [... ] converts the NodeList into a normal JavaScript array
 const cards = [...document.querySelectorAll('.auth-card')];
 
+// Reuse the existing introduction area for all authentication-state copy.
+const intro = document.querySelector('.intro');
+const introHeading = document.querySelector('[data-intro-heading]');
+const introDescription = document.querySelector('[data-intro-description]');
+
+// One source of truth for the motivational content shown beside each active form.
+const introMessages = {
+    login: {
+        heading: 'Great careers<br>start with<br>one <em>bold step.</em>',
+        description: 'Build a resume that opens doors, showcases your strengths, and gets you closer to your dream job.'
+    },
+    signup: {
+        heading: 'Your future<br>is yours to<br><em>create.</em>',
+        description: 'Build your profile, craft your resume, and unlock opportunities with confidence.'
+    },
+    forgot: {
+        heading: 'No worries,<br><em>we\'ve got you.</em>',
+        description: 'Reset your password securely and get back to building your future.'
+    }
+};
+
+let introTransition;
+
+
+// ============================================================
+// DYNAMIC INTRODUCTION CONTENT
+// ============================================================
+
+function updateIntro(name) {
+
+    const message = introMessages[name];
+
+    // Ignore unknown states and avoid replaying the same transition.
+    if (!message || intro.dataset.state === name) return;
+
+    window.clearTimeout(introTransition);
+
+    // Fade the current copy out before replacing it.
+    intro.classList.add('is-transitioning');
+
+    introTransition = window.setTimeout(() => {
+
+        introHeading.innerHTML = message.heading;
+        introDescription.textContent = message.description;
+        intro.dataset.state = name;
+
+        // Removing the same class lets CSS animate the new copy into place.
+        window.requestAnimationFrame(() => {
+            intro.classList.remove('is-transitioning');
+        });
+
+    }, 160);
+}
+
 
 // ============================================================
 // ACTIVATE / SWITCH CARD
@@ -23,6 +77,9 @@ function activateCard(name) {
 
     // Store the currently active card in the data-active attribute
     stage.dataset.active = name;
+
+    // Keep the left-side motivational content in sync with the active form.
+    updateIntro(name);
 
 
     // Go through every authentication card
