@@ -32,6 +32,39 @@ const introMessages = {
 
 let introTransition;
 
+const cursorShadow = document.querySelector('.cursor-shadow');
+
+if (cursorShadow && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let targetX = window.innerWidth / 2;
+    let targetY = window.innerHeight / 2;
+    let currentX = targetX;
+    let currentY = targetY;
+    let cursorFrame;
+
+    const moveCursorShadow = event => {
+        targetX = event.clientX;
+        targetY = event.clientY;
+
+        if (!cursorFrame) cursorFrame = window.requestAnimationFrame(animateCursorShadow);
+        document.body.classList.add('has-cursor-shadow');
+    };
+
+    const animateCursorShadow = () => {
+        currentX += (targetX - currentX) * .16;
+        currentY += (targetY - currentY) * .16;
+
+        cursorShadow.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate3d(-50%, -50%, 0)`;
+
+        if (Math.abs(targetX - currentX) > .1 || Math.abs(targetY - currentY) > .1) {
+            cursorFrame = window.requestAnimationFrame(animateCursorShadow);
+        } else {
+            cursorFrame = null;
+        }
+    };
+
+    window.addEventListener('pointermove', moveCursorShadow, { passive: true });
+}
+
 
 // ============================================================
 // DYNAMIC INTRODUCTION CONTENT
