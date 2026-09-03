@@ -10,11 +10,7 @@
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:3B82F6,100:8B5CF6&height=220&section=header&text=ResumeCraft%20AI&fontSize=50&fontColor=ffffff&animation=fadeIn"/>
 
-<img src="https://img.shields.io/github/stars/nayandeep-09/Resume_craft.ai?style=for-the-badge"/>
-<img src="https://img.shields.io/github/forks/nayandeep-09/Resume_craft.ai?style=for-the-badge"/>
-<img src="https://img.shields.io/github/license/nayandeep-09/Resume_craft.ai?style=for-the-badge"/>
-<img src="https://img.shields.io/github/repo-size/nayandeep-09/Resume_craft.ai?style=for-the-badge"/>
-<img src="https://komarev.com/ghpvc/?username=nayandeep-09&label=Repository%20Views&style=for-the-badge&color=blue"/>
+<p align="center"><img src="https://img.shields.io/github/stars/nayandeep-09/Resume_craft.ai?style=for-the-badge"/> <img src="https://img.shields.io/github/forks/nayandeep-09/Resume_craft.ai?style=for-the-badge"/> <img src="https://img.shields.io/github/license/nayandeep-09/Resume_craft.ai?style=for-the-badge"/> <img src="https://img.shields.io/github/repo-size/nayandeep-09/Resume_craft.ai?style=for-the-badge"/> <img src="https://komarev.com/ghpvc/?username=nayandeep-09&label=Repository%20Views&style=for-the-badge&color=blue"/></p>
 
 </div>
 
@@ -42,6 +38,37 @@ ResumeCraft AI is a modern AI-powered Resume Builder that enables users to build
 - 🔥 Live Resume Preview
 - 📱 Responsive Design
 - ⚡ Fast Performance
+
+---
+
+# 🗺 Project Journey & Roadmap
+
+This roadmap shows the journey of ResumeCraft AI from its first frontend foundation to a complete AI-powered resume platform.
+
+## 🌱 Where I Started
+
+- Planned the ResumeCraft AI website as an AI-powered resume-building platform
+- Set up the initial frontend structure and responsive design direction
+- Defined the core product vision: resume creation, AI guidance, templates, and career tools
+
+## ✅ Completed Right Now
+
+- Login page completed successfully
+- Initial account-access interface and visual foundation are in place
+
+## 🎯 Next Target
+
+- Add database input and integration
+- Connect user account data to persistent storage
+
+## 🚧 Future ResumeCraft AI Phases
+
+- Complete backend authentication and account management
+- Build the resume editor and live resume preview
+- Add resume templates, customization, and PDF export
+- Integrate AI resume writing, grammar suggestions, and ATS analysis
+- Add cover letters, interview preparation, and job recommendations
+- Build user dashboard, cloud storage, resume history, and analytics
 
 ---
 
