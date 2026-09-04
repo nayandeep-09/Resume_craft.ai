@@ -169,12 +169,12 @@ body::after {
     position: fixed;
     z-index: -1;
 
-    width: 220px;
-    height: 220px;
+    width: 140px;
+    height: 140px;
 
     border-radius: 50%;
 
-    background: rgba(38, 32, 82, .24);
+    background: rgba(38, 32, 82, .36);
     filter: blur(32px);
     opacity: 0;
     pointer-events: none;
